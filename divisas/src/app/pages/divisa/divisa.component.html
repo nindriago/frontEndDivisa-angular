@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="col-sm-auto" style="text-align:center">
+        <h1>
+            Bienvenidos a {{ title }}!
+        </h1>
+        <img width="400" alt="Logo" src="../../../assets/images/logo.svg.png">
+    </div>
+    <br />
+    <form [formGroup]='currenciesForm' (ngSubmit)='onSubmit()'>
+        <div class="row justify-content-sm-center">
+            <div class="form-group btn-group">
+                <div class="col-sm-auto">
+                    <input type="number" class="form-control" name="currencyEntrada_1" [value]='valorEntrada' (keyup)='inputEntrada()' formControlName='currencyEntrada_1' style="width: 150px;" [placeholder]=selectCurrency_1.value>
+                </div>
+                <div class="col-sm-auto">
+                    <select class="browser-default custom-select" style="width: 100px;" formControlName='currencyEntrada_2' #selectCurrency_1 (change)='valorCambiado(selectCurrency_1.value)'>
+                    <option *ngFor="let divisa of divisasArray" value={{divisa.codigo}}>
+                      {{ divisa.codigo }}
+                    </option>
+                </select>
+                </div>
+                <div class="col-sm-auto">
+                    <select class="browser-default custom-select" style="width: 100px;" formControlName='currencyEntrada_3' #selectCurrency_2>
+                    <option *ngFor="let divisa of divisasArraySalida" value={{divisa.divisaSalida}}>
+                      {{ divisa.divisaSalida }}
+                    </option>
+                </select>
+                </div>
+
+                <div class="col-sm-auto">
+                    <input type="text" class="form-control" style="width: 100px;" style="width: 150px;" [placeholder]=selectCurrency_2.value [value]="valorSalida | currency: selectCurrency_2.value : 'symbol-narrow':'1.2-2'" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <div class="form-group form-row">
+                <div class="col">
+                    <input type="number" class="form-control" name="currencyEntrada_4" [value]='valorEntrada' (keyup)='inputEntrada()' formControlName='currencyEntrada_1' [placeholder]=selectCurrency_1.value>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" [placeholder]=selectCurrency_2.value [value]="valorSalida | currency: selectCurrency_2.value : 'symbol-narrow':'1.2-2'" disabled>
+                </div>
+            </div>
+            <div class="form-group" style="text-align:center">
+                <button type="submit" [disabled]='!currenciesForm.valid' class="btn btn-primary btn-lg center">Calculate</button>
+            </div>
+        </div>
+    </form>
+</div>
